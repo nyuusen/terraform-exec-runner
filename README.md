@@ -6,6 +6,8 @@ Terraform実行用のDocker環境を作るファイルを置いているリポ�
 
 ## 使い方
 
+このDockerfileをプロジェクト側に持っていき、ビルド＆起動してTerraformコマンドを実行する
+
 ### ビルド
 
 Terraformバージョンの指定が可能
@@ -23,15 +25,15 @@ $ docker build -t terraform-exec-runner .
 
 ### 起動
 
-```sh
-$ docker run terraform-exec-runner
-
-Terraform v1.5.7
-on linux_arm64
-```
-
-- 起動(対話型モード)
+- 対話モード(bash)で入って、その中で任意のTerraformコマンド実行
+※マウントする場所はプロジェクトに合わせる
 
 ```sh
-$ docker run -it terraform-exec-runner bash
+$ docker run --rm -it -v $(pwd):/app -w /app terraform-exec-runner bash
+root@xxxxxxxxx:/# terraform init
 ```
+
+
+## その他
+
+- Lambda関数本体のビルドなどでPythonやNodeが必要な場合は、適宜Dockerfileに環境作る処理を追加する
