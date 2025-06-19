@@ -36,4 +36,5 @@ root@xxxxxxxxx:/# terraform init
 
 ## その他
 
-- Lambda関数本体のビルドなどでPythonやNodeが必要な場合は、適宜Dockerfileに環境作る処理を追加する
+- AWS等の認証情報は別途コンテナ側に渡す必要あり
+- Lambda関数本体のビルドなどでPythonやNodeが必要な場合は、適宜Dockerfileに環境作る処理を追加する必要あり
