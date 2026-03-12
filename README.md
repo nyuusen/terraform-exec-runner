@@ -38,4 +38,12 @@ root@xxxxxxxxx:/# terraform init
 ## その他
 
 - AWS等の認証情報は別途コンテナ側に渡す必要あり
-- Lambda関数本体のビルドなどでPythonやNodeが必要な場合は、適宜Dockerfileに環境作る処理を追加する必要あり
+```
+## 直接渡す
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+docker run --rm -it -v $(pwd):/app -e AWS_ACCESS_KEY_ID -w /app terraform-exec-runner bash
+## .envファイルから渡す
+docker run --rm -it -v $(pwd):/app --env-file .env -w /app terraform-exec-runner bash
+```
+  
+- Lambda関数本体のビルドなどでPythonやNodeが必要な場合は、適宜Dockerfileにそれらをインストールしたりする必要あり
